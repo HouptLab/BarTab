@@ -1,0 +1,15 @@
+<div id= "nav_buttons" class="row">
+	<div class="col-xs-4">
+		<button class="btn btn-primary" ng-disabled="no_previous_subject" ng-click="previous_subject()">Prev</button> 
+	</div>
+	<div class="col-xs-4" style=" display: flex;align-items: center;justify-content: center;">
+		<a href="{{site.baseurl}}/expt/?id=[[{expt_code}]]"><button class="btn btn-primary">Expt</button></a>&nbsp;
+		<a href="{{site.baseurl}}/scan/"><button class="btn btn-success">Scan Cage QR</button></a>
+	</div>
+
+	<div class="col-xs-4" style="text-align:right">
+		<button class="btn btn-primary" ng-disabled="no_next_subject" ng-click="next_subject()">
+			Next
+		</button> 
+	</div>
+</div>

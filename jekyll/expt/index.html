@@ -1,0 +1,100 @@
+---
+layout: plain
+ngApp: exptApp
+
+title: Experiments 
+
+
+
+
+---
+
+<link href="{{site.baseurl}}/bartab.css" rel="stylesheet">
+
+
+
+
+<div ng-controller="exptCtrl" class="bartab"  >
+
+
+		
+{% include bartab/loading_page.html %}
+
+
+	<div class="loaded " style="display:none;">
+
+{% include_relative _nav_buttons.html %}
+
+		
+		<div id="exptinfo" class="subject-info" style="margin-bottom:0;">
+
+				<label class="control-label" for="expt">Experiment</label>
+				<h2 id="expt" style="margin-top:-0px"> [[{expt_code}]]: [[{ expt.name }]]  <a  ng-show="expt.wikipage"  ng-href="[[{expt.wikipage}]]">(wiki)</a></h2>
+
+				<p><em>Updated: [[{ expt.last_updated }]]</em></p>
+
+				<label class="control-label" for="investigators">Investigators</label>
+				<p id="investigators">[[{ expt.investigators }]] </p>
+
+				<label class="control-label" >Contacts</label>
+				<p ng-repeat="contact in contacts" style="line-height:0.75;" > [[{ contact.name }]], <a ng-href="mailto:[[{ contact.email }]]">[[{ contact.email }]]</a>, [[{ contact.phone }]]</p>
+
+				<label class="control-label" for="protocol">Protocol</label>
+				<p id="protocol"><a href="{{site.baseurl}}/protocols/[[{ expt.protocol }]].pdf"> [[{ expt.protocol }]] (pdf)</a></p>
+
+				<label class="control-label" >Drug Exposure</label>
+				<p ng-repeat="(key,value) in expt.drugs" style="line-height:0.75;"><a ng-href="[[{ value }]]">[[{ key }]] (msds)</a></p><p></p>
+
+<!--
+				<label class="control-label" for="groups">Groups</label>
+				<p><span ng-repeat="(key,value) in expt.groups"> [[{ key }]]; </scan></p>
+--> 
+<br>
+
+		</div> <!-- expt -->
+		
+		
+<div class="row">
+    <div class="col-md-6">
+
+        <div class="groupkey" id="groupkey" name="groupkey">
+        </div> <!-- groupkey -->
+        <label class="control-label" for="groupkey">Click key label to hide/show group</label>
+
+    </div>  <!-- groups -->
+    
+    <div class="col-md-6">
+        <div>
+                <h2>Subjects</h2>
+                <!--<select id="subjects" ng-model="selected_subject" 
+                    ng-change="subject_selection_changed(selected_subject,'{{site.baseurl}}')">
+                    <option value="none" selected="selected">view subject</option>
+                    <option ng-repeat="subj in subject_codes" value="[[{subj}]]"> [[{subj}]]</option>
+                </select></h2> -->
+        
+                <button ng-repeat="subj in subject_codes" value="[[{subj}]]">
+                <a href="{{site.baseurl}}/subj/?id=[[{subj}]]"><span style="color:[[{subjectColor(subj)}]];">[[{subj}]]</span></a>
+                </button>
+        </div>
+    </div> <!-- subjects -->
+</div> <!-- row -->
+
+<!-- for each variable -->
+
+<div class="datagraphs" id="datagraphs">
+
+
+</div> <!-- datagraphs -->
+
+{% include bartab/download_buttons.html %}
+
+
+</div> <!-- loaded -->
+
+</div> <!-- app controller -->
+
+{% include bartab/bartender_firebase_api.html %}
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+
+<script src="expt.js"></script>

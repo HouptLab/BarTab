@@ -1,0 +1,69 @@
+---
+layout: plain
+ngApp: subjectApp
+
+title: Subject
+
+bartab_baseurl: "bartab"
+
+---
+
+
+<link href="{{site.baseurl}}/bartab.css" rel="stylesheet">
+
+
+     
+
+<div ng-controller="subjectCtrl" class="bartab">
+
+{% include bartab/loading_page.html %}
+
+
+<div  class="loaded" style="display:none;">
+
+
+
+{% include_relative _nav_buttons.html %}
+
+
+<div class="subject-info">
+
+<label class="control-label" for="subject">Subject</label>
+<h1 id="subject" style="margin-top:-0px">[[{ subject  }]] <span><small>([[{ expt.subjects[subject].group }]])</small></span></h1>
+<p><em>Updated: [[{ expt.last_updated }]]</em></p>
+
+
+<label class="control-label" for="expt">Experiment</label>
+<p id="expt"><a href="{{site.baseurl}}/expt/?id=[[{expt_code}]]">[[{ expt.name }]]</a></p>
+
+<label class="control-label" for="investigators">Investigators</label>
+<p id="investigators">[[{ expt.investigators }]] </p>
+
+<label class="control-label" >Contacts</label>
+<p ng-repeat="contact in contacts" style="line-height:0.75;" > [[{ contact.name }]], <a ng-href="mailto:[[{ contact.email }]]">[[{ contact.email }]]</a>, [[{ contact.phone }]]</p>
+
+<label class="control-label" for="protocol">Protocol</label>
+<p id="protocol"><a href="{{site.baseurl}}/protocols/[[{ expt.protocol }]].pdf"> [[{ expt.protocol }]] (pdf)</a></p>
+
+<label class="control-label" >Drug Exposure</label>
+<p ng-repeat="(key,value) in expt.drugs" style="line-height:0.75;"><a ng-href="[[{ value }]]">[[{ key }]] (msds)</a></p>
+
+</div> <!-- subject info -->
+
+
+
+
+<!-- for each variable -->
+
+<div class="datagraphs" id="datagraphs">
+
+
+</div>
+
+</div> <!-- loaded -->
+
+</div> <!-- app controller -->
+
+{% include bartab/bartender_firebase_api.html %}
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script src="subject.js"></script>

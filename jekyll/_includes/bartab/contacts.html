@@ -1,0 +1,22 @@
+
+<!-- TODO: get this from colony config -->
+<div id="projinfo"> 
+    {% if include.proj_title %}
+    <h1>[[{proj_code}]]: [[{ proj_name}]] </h1>
+    {% else %}
+    <label class="control-label" for="project">Project</label>
+    <p id="project">[[{proj_code}]]: [[{ proj_name}]] </p>
+    {% endif %}
+
+    <label class="control-label" for="investigators">Investigators</label>
+    <p id="investigators">{{ page.investigators}} </p>
+    <label class="control-label" for="contacts">Contacts</label>
+    <p ng-repeat="c in cage.contacts"> [[{c.name}]], <a ng-href="mailto:[[{c.mail}]]">[[{c.email}]]</a>, [[{c.phone}]] </p>
+    <br>
+    <label class="control-label" for="protocol">Protocol</label>
+    <p id="protocol" class="protocol-link">
+        <a ng-href="{{site.baseurl}}/protocols/[[{cage.protocol}]].pdf">  
+         [[{cage.protocol}]] (link to pdf)
+        </a>
+    </p>
+</div> <!-- projinfo -->

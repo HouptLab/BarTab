@@ -1,0 +1,18 @@
+<svg viewBox="0 0 52 52" width="24" xmlns="http://www.w3.org/2000/svg">
+	<style>
+		._help-default { 
+				font: bold 42px Helvetica, sans-serif; 
+				fill:darkgray; 
+				text-anchor:middle;
+			}
+		._help-circle-default { 
+				fill: none; 
+				stroke: gray; 
+				stroke-width:4;
+			}
+	</style>
+	<circle cx="26" cy="26" r="24" 
+		fill="none" stroke="black"  stroke-width="4" 
+		class="_help-circle-default help-icon-circle"/> 
+	<text x="26" y="40" class="_help-default help-icon-text"><title>Show help text </title>?</text>
+</svg>   

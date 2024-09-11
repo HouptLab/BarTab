@@ -1,0 +1,30 @@
+
+<!-- angularjs for jekyll-angular-firebase (JAF) -->
+<!-- was 1.3.16 -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular-route.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular-resource.min.js"></script>
+
+<!-- AngularFire -->
+<!-- https://github.com/FirebaseExtended/angularfire?tab=readme-ov-file -->
+<script src="https://cdn.firebase.com/libs/angularfire/2.3.0/angularfire.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular-messages.js"></script>
+<script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-1.3.3.js"></script>
+
+
+<script src="https://www.gstatic.com/firebasejs/4.3.1/firebase.js"></script>
+
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<!-- script src="https://www.gstatic.com/firebasejs/7.2.2/firebase-app.js"></script -->
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<!-- script src="https://www.gstatic.com/firebasejs/7.2.2/firebase-analytics.js"></script -->
+
+<script>
+  // Your web app's Firebase configuration
+  {% include firebaseConfig.js %}
+  
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+</script>

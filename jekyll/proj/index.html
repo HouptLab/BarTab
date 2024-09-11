@@ -1,0 +1,59 @@
+---
+layout: plain
+ngApp: projApp
+title: Projects • Houpt Lab
+
+
+bartab_baseurl : bartab
+
+---
+
+<link href="{{site.url}}/{{page.bartab_baseurl}}/bartab.css" rel="stylesheet">
+
+
+
+
+<div ng-controller="projCtrl" class="bartab"  >
+
+{% include bartab/loading_page.html %}
+
+
+	<div class="loaded " style="display:none;">
+
+{% include_relative _nav_buttons.html %}
+
+      <h1>Projects</h1>
+      
+		<div class="subject-info" id="accordion" >
+			<div ng-repeat="proj in proj_codes">
+				<div role="tab"  id="heading_[[{proj.code}]]">
+					<h2>
+					<a role="button" data-toggle="collapse" data-parent="#accordion" href="#[[{proj.code}]]" aria-expanded="true" aria-controls="[[{proj.code}]]">
+					<span ng-show="!(proj.code == 'UNA')">[[{proj.code}]]: </span>[[{proj.name}]]</a>
+					</h2>
+				</div>
+			
+
+				<div role="tabpanel" id="[[{proj.code}]]" class="panel-collapse collapse in"  aria-labelledby="heading_[[{proj.code}]]">
+					<div ng-repeat="expt in proj.expts | orderBy:'last_updated_ms' : true " class="well">
+								<h3 id="expt" style="margin-top:-0px"><a href="{{site.url}}/{{page.bartab_baseurl}}/expt/?id=[[{expt.code}]]">[[{expt.code}]]: [[{ expt.name }]]</a> <a ng-show="expt.wikipage" ng-ref="[[{expt.wiki}]]">(wiki)</a></h3>
+
+								<p><em>Updated: [[{ expt.last_updated }]]</em></p>
+
+								<label class="control-label" for="investigators">Investigators</label>
+								<p id="investigators">[[{ expt.investigators }]] </p>
+
+					</div> <!-- expt -->
+				</div> <!-- tabpanel -->
+			</div> <!-- proj ng-repeat -->
+		</div> <!-- projinfo -->
+
+       <h1><a href="{{site.url}}/{{page.bartab_baseurl}}/archive">Archived</a></h1>
+	</div> <!-- loaded -->
+
+</div> <!-- app controller -->
+
+{% include bartab/bartender_firebase_api.html %}
+
+
+<script src="proj.js"></script>

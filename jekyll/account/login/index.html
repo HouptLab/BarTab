@@ -1,0 +1,91 @@
+---
+layout: plain
+ngApp: loginApp
+title: Login
+
+
+
+---
+
+<link href="{{site.baseurl}}/bartab.css" rel="stylesheet">
+
+<div ng-controller="loginCtrl" class="bartab"  >
+
+{% include bartab/loading_page.html %}
+
+
+<div class="loaded " style="display:none;">
+
+{% include_relative _nav_buttons.html %}
+
+
+<div class="login_div">
+
+<div style="margin-bottom:32px;">
+
+<h1>Login</h1>
+</div>
+
+<form role="form"  ng-submit="submit()">
+
+
+<div class="row info-div" >
+<div class="col-xs-4 col-md-3">
+<label class="control-label" for="login">Email for login</label>
+<input required id="login" type="email" size=20 ng-model="email">
+</div>
+<div class="col-xs-4 col-md-3">
+<label class="control-label" for="last_name">Password</label>
+<input required id="password" type="password" size=20 ng-model="password">
+</div>
+</div>
+
+<div class="info-div">
+<button class="btn btn-primary btn-lg" type="submit" style="width:150px;">Login</button>
+</div>
+
+
+<div class="info-div">
+<p>If you have forgotten your password, an email will be sent to the email address used for your account: please follow the instructions in the email to reset your password.</p>
+</div>
+<div class="info-div">
+<button class="btn btn-info" type="button">Forgot Password</button>
+</div>
+
+
+</form>
+
+
+</div> <!-- login_div -->
+
+
+<div class="signout_div">
+
+<div style="margin-bottom:20vh;margin-top:20vh;">
+
+<h3>Current user signed in: &nbsp;&nbsp;<span  style=" font-style: italic;">[[{user_email}]]</span></h3>
+
+</div>
+
+<div class="info-div">
+
+<a href="{{site.baseurl}}/proj"><button class="btn btn-success" type="button" ">Go to Projects</button></a>&nbsp;&nbsp;&nbsp;<button class="btn btn-info" type="button" ng-click="signout();">Sign Out</button>
+</div>
+
+</div> <!-- signout_div -->
+
+
+<div style="margin-bottom:30vh;"></div>
+<p>Made with <a href="https://getbootstrap.com/docs/3.4/">Bootstrap</a>, <a href="https://angularjs.org">AngularJS</a>, <a href="https://github.com/angular/angularfire/">AngularFire</a>, and <a href="https://firebase.google.com">Firebase</a>.
+<hr>
+
+
+</div> <!-- loaded -->
+
+
+</div> <!-- app controller -->
+
+{% include bartab/bartender_firebase_api.html %}
+
+
+<script src="login.js"></script>

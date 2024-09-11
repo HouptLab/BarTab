@@ -1,0 +1,168 @@
+---
+layout: plain
+
+title: QR Scan
+
+bartab_baseurl: "bartab"
+bartab_absoluteurl: "https://houptlab.org/bartab/"
+---
+
+  
+  <!-- 
+  don't need this apparently  -->
+
+  <!-- script type="text/javascript" 
+  src="https://cdnjs.cloudflare.com/ajax/libs/webrtc-adapter/7.3.0/adapter.min.js">
+  </script --> 
+  
+    <script type="text/javascript" src="instascan.min.js"></script>
+    
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    
+    <style>
+    h1 {
+    	font-family: helvetica;
+    	font-weight: 700;
+    	font-size: 18pt;
+    	text-align: center;
+    }
+    p {
+    	font-family: helvetica;
+    	font-size: 12pt;
+    	text-align: center;	
+        font-style: italic;
+    }
+     .scan_div {
+        margin:0;
+        width: 100vw;
+        height: 100vh;
+     	background-color: lightgray;
+     	padding-top: 2%;
+     }
+     .preview-container {
+       flex-direction: column;
+       align-items: center;
+       justify-content: center;
+       display: flex;
+       width: 47vh;
+       height: 75vh;
+       overflow: hidden;
+       border: solid black 2px;
+       min-width: 270px;
+       padding-top: 0%;
+       margin-top:4%;
+       margin-left: auto;
+       margin-right: auto;
+       margin-bottom:16px;
+     }
+     .videoInsert {
+           position: relative; 
+          left: 0; 
+          top: 0;
+          margin-top:0;
+           min-width: 100%; 
+           min-height: 100%;
+          width: auto; 
+          height: auto; 
+          z-index: 100;
+           background-size: cover;
+          overflow: hidden;
+     }
+ </style>
+ 
+ 
+  <div class="scan_div">
+    <h1>Scan Cage QR Code</h1>
+    <p>to view subject's data page</p>
+    <div class="preview-container" >
+     	<video class="videoInsert" id="preview" playsinline></video>
+    <div>
+    
+    </div>  <!-- scan_div -->
+
+    <script type="text/javascript">
+
+   /*
+    followed instructions for rebuilding instascan from https://github.com/schmich/instascan/issues/182
+    
+From @apchandler:
+=================
+How to modify InstaScan and minify it:
+
+
+at a terminal in the directory you want it to download run:
+git clone https://github.com/JoseCDB/instascan.git
+at the terminal cd to the instascan directory:
+cd instascan
+change the javascript and run gulp to release the code:
+gulp release
+This will give you a new minified instascan.min.js item in the dist folder.
+I am going to figure out this Android issue hopefully this weekend. I hope this gives you enough insight for any future projects with this awesome library.
+
+From  @glorynguyen:
+===================
+I followed above steps then edit file camera.js (at line 29) as below
+facingMode: { exact: "environment" },
+It work for me. Thank you @apchandler
+    
+    NB: had to install gulp, and then nvm in order to nvm install 10 because gulp only works with node 10 or lower
+
+Other fixes:
+============
+
+    I added the meta tag.
+
+Added this attribute:
+<video id="scanner" class="video-back" playsinline></video>
+
+Added this JS file:
+ type="text/javascript" src="https://webrtc.github.io/adapter/adapter-latest.js">
+
+*/
+
+
+      function handleContent(content) {
+          const matchURL = "{{page.bartab_absoluteurl}}";
+          if (content.startsWith(matchURL)) {
+               window.location.href = content ;
+          }
+      };
+      let scanner = new Instascan.Scanner({ video: document.getElementById('preview'), scanPeriod: 5, mirror: false });
+      scanner.addListener('scan', function (content) {
+        console.log(content);
+        handleContent(content);
+      });
+      Instascan.Camera.getCameras().then(function (cameras) {
+      
+//        navigator.mediaDevices.enumerateDevices()
+// 			.then(function(devices) {
+// 			  devices.forEach(function(device) {
+// 				console.log(device.kind + ": " + device.label +
+// 							" id = " + device.deviceId);
+// 			  });
+// 			})
+// 			.catch(function(err) {
+// 			  console.log(err.name + ": " + err.message);
+// 			});
+
+
+          if (cameras.length > 0) {
+               for (var i in cameras) {
+                // if (confirm (i + ": " + cameras[i].name)) {
+                // console.log(cameras[i]);
+                 // try to find rear facing camera
+                 if (null != cameras[i].name.match(/back/i)){
+                    // alert("Starting camera " + i + ": " + cameras[i].name);
+                     scanner.start(cameras[i]);
+                    return;
+                 }
+               } // next camera
+               alert('No back camera found');
+          }
+          
+          console.error('No cameras found.');
+         
+      }).catch(function (e) {
+        console.error(e);
+      });
+    </script>

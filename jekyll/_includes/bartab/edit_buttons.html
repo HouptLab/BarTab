@@ -1,0 +1,13 @@
+    <div class="row" style="margin-top:32px;" ng-show="loggedIn">
+
+        <div class="col-xs-6">
+          <button id="showHelpButton" ng-class="[{active: showhelp}]" class="btn btn-default btn-secondary" ng-click="toggleHelp()"><span style="font-weight:bold;">?</span></button>
+            <button  ng-show="!editing" ng-class="[{active: editing}]" class="btn btn-default btn-secondary" ng-click="toggleEditing();"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>
+            <button ng-show="editing" class="btn btn-default btn-secondary" ng-click="cancel()">Cancel</button>
+            <button ng-show="editing" class="btn  btn-success" ng-click="saveItem()">Save</button>
+        </div>
+
+        <div class="col-xs-6" style="text-align:right;">
+            <button ng-show="editing" class="btn btn-warning" ng-click="deleteItem()">Delete</button>
+        </div>
+    </div> <!-- loggedIn buttons  -->

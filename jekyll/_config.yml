@@ -1,0 +1,16 @@
+name: BarTab
+url: "https://mylabwebsite.org" # the base url of your site
+lab_name: "My Lab" # name of lab put in window title bar
+markdown: rdiscount
+highlighter: true
+baseurl: "/bartab" # the subpath of your site, e.g. /bartab or /gradbeta or /~houpt
+
+exclude:
+  - ".DS_Store"
+  - Gemfile
+  - Gemfile.lock
+  - "README.md"
+  - "Makefile"
+  - "vendor/"
+
+plugins:
