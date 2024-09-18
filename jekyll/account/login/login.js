@@ -190,12 +190,15 @@ app.controller("loginCtrl", ["$scope", "exptDataAuthFunction", "signoutFunction"
 
                     }).catch(function(error) {
                         // TODO Handle error
+                        alert("Problem logging in: " + error.message);
+                        
                     });
 
 
                 })
                 .catch(function(error) {
                     console.log("Authentication failed:", error);
+                    alert("Problem logging in: " + error.message)
                     $scope.auth.authenticated = false;
                     // TODO: post error, return to login page
                 });
